@@ -26,7 +26,8 @@ public class Register {
 
 
         //将数据插入数据库
-        return 0;
+        return 1;
+
 
     }
 }
