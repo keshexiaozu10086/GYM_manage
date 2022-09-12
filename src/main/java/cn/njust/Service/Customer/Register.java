@@ -22,11 +22,11 @@ public class Register {
                 }
                 String uid = stringBuffer.toString();
             }
-        while(true);//查找数据库检验是否有重复ID
+        while(false);//查找数据库检验是否有重复ID
 
 
         //将数据插入数据库
-
+        return 0;
 
     }
 }
