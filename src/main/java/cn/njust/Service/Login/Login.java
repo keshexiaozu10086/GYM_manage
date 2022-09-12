@@ -6,11 +6,11 @@ public class Login {
     {
         if(id_number.length()==5)//用户id
         {
-            //查找数据库
+            //查找数据库验证密码
         }
         else//手机号
         {
-            //查找数据库
+            //查找数据库验证密码
         }
         return 0;
     }
