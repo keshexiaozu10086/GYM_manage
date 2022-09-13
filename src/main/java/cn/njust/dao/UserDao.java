@@ -34,4 +34,5 @@ public class UserDao extends BaseDao{
         UserDao dao=new UserDao();
         dao.insert(a);
     }*/
+
 }
