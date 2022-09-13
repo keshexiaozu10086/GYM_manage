@@ -1,15 +1,11 @@
 package cn.njust.dao;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class BaseDao {
     protected Connection conn = null;
     protected Statement stmt = null;
     protected ResultSet rs = null;
-    protected String url = "jdbc:mysql://localhost:3306/gym?characterEncoding=utf-8";
+    protected String url = "jdbc:mysql://localhost:3306/gym";
     protected String name = "root";
     protected String password = "123456";
     protected PreparedStatement pstmt=null;
@@ -43,5 +39,11 @@ public class BaseDao {
         }
     }
 
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+      BaseDao dao=new BaseDao();
+      dao.connect();
+
+    }
 
 }

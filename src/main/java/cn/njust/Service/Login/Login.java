@@ -6,7 +6,7 @@ public class Login {
     {
         if(id_number.length()==5)//用户id
         {
-            //查找数据库11
+            //查找数据库
         }
         else//手机号
         {

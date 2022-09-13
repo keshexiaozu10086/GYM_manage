@@ -2,12 +2,16 @@ package cn.njust.dao;
 
 import cn.njust.entity.User;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class UserDao extends BaseDao{
     public int insert(User user){
         int row=0;
         try {
             super.connect();
-            String sql="insert into user(user_id,user_name,user_number,user_password) values(?,?,?,?)";
+          String sql="insert into user(user_id,user_name,user_number,user_password) values(?,?,?,?)";
             pstmt=conn.prepareStatement(sql);
             pstmt.setString(1, user.getId());
             pstmt.setString(2, user.getName());
@@ -21,4 +25,13 @@ public class UserDao extends BaseDao{
         }
         return row;
     }
+   /* public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        User a=new User();
+        a.setId("1");
+        a.setPassword("2");
+        a.setNumber("3");
+        a.setName("4");
+        UserDao dao=new UserDao();
+        dao.insert(a);
+    }*/
 }

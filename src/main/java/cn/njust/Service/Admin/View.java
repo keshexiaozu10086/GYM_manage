@@ -13,7 +13,6 @@ public class View {
     {
         return null;
     }
-
     public Message[] viewMessage(String aid)
     {
         return null;
