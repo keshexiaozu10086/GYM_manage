@@ -11,7 +11,7 @@ public class UserDao extends BaseDao{
         int row=0;
         try {
             super.connect();
-          String sql="insert into user(user_id,user_name,user_number,user_password) values(?,?,?,?)";
+            String sql="insert into user(user_id,user_name,user_number,user_password) values(?,?,?,?)";
             pstmt=conn.prepareStatement(sql);
             pstmt.setString(1, user.getId());
             pstmt.setString(2, user.getName());
@@ -23,7 +23,7 @@ public class UserDao extends BaseDao{
         }finally{
             super.closeAll();
         }
-        return row;
+        return row;//
     }
     public void delete(User user){
         try {
