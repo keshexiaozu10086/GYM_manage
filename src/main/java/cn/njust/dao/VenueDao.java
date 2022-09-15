@@ -1,11 +1,33 @@
 package cn.njust.dao;
 
 import cn.njust.entity.Equipment;
+import cn.njust.entity.User;
 import cn.njust.entity.Venue;
 
 import java.sql.SQLException;
 
 public class VenueDao extends BaseDao{
+    public Venue allVenue(Venue venue){
+        try {
+            super.connect();
+            String sql = "select *from venue";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                venue.setId(rs.getString("venue_id"));
+                venue.setName(rs.getString("venue_name"));
+                venue.setType(rs.getString("venue_type"));
+                venue.setPrice(rs.getInt("venue_price"));
+                venue.setState(rs.getInt("venue_state"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            super.closeAll();
+        }
+        return venue;
+    }
     public VenueDao findVenue(Venue venue)
     {
         try {

@@ -1,5 +1,6 @@
 package cn.njust.dao;
 
+import cn.njust.entity.Equipment;
 import cn.njust.entity.User;
 
 import java.sql.Connection;
@@ -7,6 +8,26 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class UserDao extends BaseDao{
+    public User allUser(User user){
+        try {
+            super.connect();
+            String sql = "select *from user";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                user.setId(rs.getString("user_id"));
+                user.setName(rs.getString("user_name"));
+                user.setNumber(rs.getString("user_number"));
+
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            super.closeAll();
+        }
+        return user;
+    }
     public int insert(User user){
         int row=0;
         try {

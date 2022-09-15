@@ -3,9 +3,31 @@ package cn.njust.dao;
 import cn.njust.entity.Equipment;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class EquipmentDao extends BaseDao {
+    public Equipment allEquipment(Equipment equipment)
+    {
+        try {
+            super.connect();
+            String sql = "select *from equipment";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                equipment.setId(rs.getString("equipment_id"));
+                equipment.setName(rs.getString("equipment_name"));
+                equipment.setNumber(rs.getInt("equipment_number"));
+                equipment.setPrice(rs.getInt("equipment_price"));
+                equipment.setType(rs.getString("equipment_type"));
+                equipment.setState(rs.getInt("equipment_state"));
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            super.closeAll();
+        }
+        return equipment;
+    }
     public Equipment findEquipment(Equipment equipment) {
         try {
             super.connect();
@@ -87,7 +109,7 @@ public class EquipmentDao extends BaseDao {
             super.closeAll();
         }
     }
-    /*public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    /*public static void main(String[] args) {
         Equipment e=new Equipment();
         e.setId("11");
         e.setName("羽毛球拍");
@@ -95,8 +117,10 @@ public class EquipmentDao extends BaseDao {
         e.setNumber(10);
         e.setPrice(3);
         e.setState(0);
-        EquipmentDao dao=new EquipmentDao();
+
         dao.addEquipment(e);
         dao.deleteEquipment(e);
+        EquipmentDao dao=new EquipmentDao();
+        dao.allEquipment(e);
     }*/
 }
