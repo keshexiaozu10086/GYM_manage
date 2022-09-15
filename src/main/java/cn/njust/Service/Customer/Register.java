@@ -21,6 +21,7 @@ public class Register {
                     stringBuffer.append(str.charAt(num));
                 }
                 String uid = stringBuffer.toString();
+
             }
         while(false);//查找数据库检验是否有重复ID
 

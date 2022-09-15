@@ -1,17 +1,16 @@
 package cn.njust.Service.Login;
 
 
+import cn.njust.entity.*;
+
+import cn.njust.dao.*;
+
 public class Login {
-    public int login(String id_number,String password)
+    public int login(User user)
     {
-        if(id_number.length()==5)//用户id
-        {
-            //查找数据库
-        }
-        else//手机号
-        {
-            //查找数据库
-        }
-        return 0;
+        LoginDao dao=new LoginDao();
+        User userCorrect = dao.findUser(user);
+        if(user.getPassword()==userCorrect.getPassword())return 0;//正确登录
+        return 1;
     }
 }
