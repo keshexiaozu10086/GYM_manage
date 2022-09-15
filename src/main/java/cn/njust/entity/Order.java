@@ -9,6 +9,7 @@ public class Order {
     private Date ordertime;
     private Date returntime;
     private int sum;
+    private int state;
 
     public String getOid() {
         return oid;
@@ -56,5 +57,13 @@ public class Order {
 
     public void setSum(int sum) {
         this.sum = sum;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 }
