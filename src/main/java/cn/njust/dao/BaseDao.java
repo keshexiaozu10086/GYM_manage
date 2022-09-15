@@ -5,7 +5,7 @@ public class BaseDao {
     protected Connection conn = null;
     protected Statement stmt = null;
     protected ResultSet rs = null;
-    protected String url = "jdbc:mysql://localhost:3306/gym";
+    protected String url = "jdbc:mysql://localhost:3306/gym?Unicode=true& ;characterEncoding=UTF-8";
     protected String name = "root";
     protected String password = "123456";
     protected PreparedStatement pstmt=null;
@@ -35,11 +35,11 @@ public class BaseDao {
                 pstmt.close();
             }
         }catch(Exception e) {
-
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args)  {
 
       BaseDao dao=new BaseDao();
       dao.connect();

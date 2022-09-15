@@ -25,7 +25,22 @@ public class UserDao extends BaseDao{
         }
         return row;
     }
-   /* public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public void delete(User user){
+        try {
+            super.connect();
+            String sql="delete from user where user_id=? or user_number=?";
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1, user.getId());
+            pstmt.setString(2, user.getNumber());
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            super.closeAll();
+        }
+    }
+
+   /*public static void main(String[] args) throws ClassNotFoundException, SQLException {
         User a=new User();
         a.setId("1");
         a.setPassword("2");
