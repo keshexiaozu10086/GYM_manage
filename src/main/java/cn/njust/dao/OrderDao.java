@@ -32,7 +32,7 @@ public class OrderDao extends BaseDao{
         }
         return order;
     }
-    public OrderDao findOrder(Order order)
+    public Order findOrder(Order order)
     {
         try {
             super.connect();
