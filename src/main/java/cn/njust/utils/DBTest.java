@@ -12,7 +12,7 @@ public class DBTest {
 
     public static void main(String[] args) {
     	// 1.测试单条插入 成功
-  // 	testInsertSingleCourses();
+   	testInsertSingleCourses();
     	// 2.测试更新 成功
   //testUpdateCourse();
     	// 3.测试删除 成功
@@ -57,7 +57,7 @@ public class DBTest {
     private static void testInsertSingleCourses() {
         Map<String, Object> map = new HashMap<>();        
         map.put("user_name","un");
-        map.put("user_id", "d");
+        map.put("user_id", "是");
         map.put("user_number", "12");
         map.put("user_password","13456");
         try {

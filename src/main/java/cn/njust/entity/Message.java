@@ -1,12 +1,13 @@
 package cn.njust.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Message {
     private String aid;
     private String uid;
     private String oid;
-    private Date time;
+    private Timestamp time;
     private String id;
     private String content;
 
@@ -34,13 +35,10 @@ public class Message {
         this.oid = oid;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
+   /* public String transfer(String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(time);
+    }*/
 
     public String getId() {
         return id;
@@ -56,5 +54,15 @@ public class Message {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 }

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Êı¾İ¿âÁ¬½Ó³Ø¶ÔÏó£¬µ¥Àı
+ * æ•°æ®åº“è¿æ¥æ± å¯¹è±¡ï¼Œå•ä¾‹
  * Created by yuandl on 2016-12-16.
  */
 public class DBConnectionPool {
@@ -19,11 +19,11 @@ public class DBConnectionPool {
     private ComboPooledDataSource cpds;
 
     /**
-     * ÔÚ¹¹Ôìº¯Êı³õÊ¼»¯µÄÊ±ºò»ñÈ¡Êı¾İ¿âÁ¬½Ó
+     * åœ¨æ„é€ å‡½æ•°åˆå§‹åŒ–çš„æ—¶å€™è·å–æ•°æ®åº“è¿æ¥
      */
     private DBConnectionPool() {
         try {
-            /**Í¨¹ıÊôĞÔÎÄ¼ş»ñÈ¡Êı¾İ¿âÁ¬½ÓµÄ²ÎÊıÖµ**/
+            /**é€šè¿‡å±æ€§æ–‡ä»¶è·å–æ•°æ®åº“è¿æ¥çš„å‚æ•°å€¼**/
         	String driverClassName;
             String url;
             String username;
@@ -34,55 +34,55 @@ public class DBConnectionPool {
             if(is!=null){
                 properties.load(is);
                 System.out.println("here");
-                //»ñÈ¡ÅäÖÃÎÄ¼şµÄĞÅÏ¢
+                //è·å–é…ç½®æ–‡ä»¶çš„ä¿¡æ¯
                 driverClassName = properties.getProperty("driver");            
                 url = properties.getProperty("url");
                 username = properties.getProperty("username");
                 password = properties.getProperty("password");
              }else {
             	 driverClassName = "com.mysql.jdbc.Driver";            
-                 url = "jdbc:mysql://localhost:3306/gym?Unicode=true& ;characterEncoding=UTF-8";
+                 url = "jdbc:mysql://localhost:3306/gym?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
                  username = "root";
                  password = "123456";
              }  
 
-            /**Êı¾İ¿âÁ¬½Ó³Ø¶ÔÏó**/
+            /**æ•°æ®åº“è¿æ¥æ± å¯¹è±¡**/
             cpds = new ComboPooledDataSource();
 
-            /**ÉèÖÃÊı¾İ¿âÁ¬½ÓÇı¶¯**/
+            /**è®¾ç½®æ•°æ®åº“è¿æ¥é©±åŠ¨**/
             cpds.setDriverClass(driverClassName);
-            /**ÉèÖÃÊı¾İ¿âÁ¬½ÓµØÖ·**/
+            /**è®¾ç½®æ•°æ®åº“è¿æ¥åœ°å€**/
             cpds.setJdbcUrl(url);
-            /**ÉèÖÃÊı¾İ¿âÁ¬½ÓÓÃ»§Ãû**/
+            /**è®¾ç½®æ•°æ®åº“è¿æ¥ç”¨æˆ·å**/
             cpds.setUser(username);
-            /**ÉèÖÃÊı¾İ¿âÁ¬½ÓÃÜÂë**/
+            /**è®¾ç½®æ•°æ®åº“è¿æ¥å¯†ç **/
             cpds.setPassword(password);
 
-            /**³õÊ¼»¯Ê±´´½¨µÄÁ¬½ÓÊı,Ó¦ÔÚminPoolSizeÓëmaxPoolSizeÖ®¼äÈ¡Öµ.Ä¬ÈÏÎª3**/
+            /**åˆå§‹åŒ–æ—¶åˆ›å»ºçš„è¿æ¥æ•°,åº”åœ¨minPoolSizeä¸maxPoolSizeä¹‹é—´å–å€¼.é»˜è®¤ä¸º3**/
             cpds.setInitialPoolSize(3);
-            /**Á¬½Ó³ØÖĞ±£ÁôµÄ×î´óÁ¬½ÓÊı¾İ.Ä¬ÈÏÎª15**/
+            /**è¿æ¥æ± ä¸­ä¿ç•™çš„æœ€å¤§è¿æ¥æ•°æ®.é»˜è®¤ä¸º15**/
             cpds.setMaxPoolSize(10);
-            /**µ±Á¬½Ó³ØÖĞµÄÁ¬½ÓÓÃÍêÊ±£¬C3POÒ»´ÎĞÔ´´½¨ĞÂµÄÁ¬½ÓÊıÄ¿;**/
+            /**å½“è¿æ¥æ± ä¸­çš„è¿æ¥ç”¨å®Œæ—¶ï¼ŒC3POä¸€æ¬¡æ€§åˆ›å»ºæ–°çš„è¿æ¥æ•°ç›®;**/
             cpds.setAcquireIncrement(1);
-            /**¸ô¶àÉÙÃë¼ì²éËùÓĞÁ¬½Ó³ØÖĞµÄ¿ÕÏĞÁ¬½Ó,Ä¬ÈÏÎª0±íÊ¾²»¼ì²é;**/
+            /**éš”å¤šå°‘ç§’æ£€æŸ¥æ‰€æœ‰è¿æ¥æ± ä¸­çš„ç©ºé—²è¿æ¥,é»˜è®¤ä¸º0è¡¨ç¤ºä¸æ£€æŸ¥;**/
             cpds.setIdleConnectionTestPeriod(60);
-            /**×î´ó¿ÕÏĞÊ±¼ä,³¬¹ı¿ÕÏĞÊ±¼äµÄÁ¬½Ó½«±»¶ªÆú.Îª0»ò¸ºÊı¾İÔòÓÀ²»¶ªÆú.Ä¬ÈÏÎª0;**/
+            /**æœ€å¤§ç©ºé—²æ—¶é—´,è¶…è¿‡ç©ºé—²æ—¶é—´çš„è¿æ¥å°†è¢«ä¸¢å¼ƒ.ä¸º0æˆ–è´Ÿæ•°æ®åˆ™æ°¸ä¸ä¸¢å¼ƒ.é»˜è®¤ä¸º0;**/
             cpds.setMaxIdleTime(3000);
 
-            /**ÒòĞÔÄÜÏûºÄ´óÇëÖ»ÔÚĞèÒªµÄÊ±ºòÊ¹ÓÃËü¡£Èç¹ûÉèÎªtrueÄÇÃ´ÔÚÃ¿¸öconnectionÌá½»µÄ
-             Ê±ºò¶¼½«Ğ£ÑéÆäÓĞĞ§ĞÔ¡£½¨ÒéÊ¹ÓÃidleConnectionTestPeriod»òautomaticTestTable
-             µÈ·½·¨À´ÌáÉıÁ¬½Ó²âÊÔµÄĞÔÄÜ¡£Default: false**/
+            /**å› æ€§èƒ½æ¶ˆè€—å¤§è¯·åªåœ¨éœ€è¦çš„æ—¶å€™ä½¿ç”¨å®ƒã€‚å¦‚æœè®¾ä¸ºtrueé‚£ä¹ˆåœ¨æ¯ä¸ªconnectionæäº¤çš„
+             æ—¶å€™éƒ½å°†æ ¡éªŒå…¶æœ‰æ•ˆæ€§ã€‚å»ºè®®ä½¿ç”¨idleConnectionTestPeriodæˆ–automaticTestTable
+             ç­‰æ–¹æ³•æ¥æå‡è¿æ¥æµ‹è¯•çš„æ€§èƒ½ã€‚Default: false**/
             cpds.setTestConnectionOnCheckout(true);
 
-            /**Èç¹ûÉèÎªtrueÄÇÃ´ÔÚÈ¡µÃÁ¬½ÓµÄÍ¬Ê±½«Ğ£ÑéÁ¬½ÓµÄÓĞĞ§ĞÔ¡£Default: false **/
+            /**å¦‚æœè®¾ä¸ºtrueé‚£ä¹ˆåœ¨å–å¾—è¿æ¥çš„åŒæ—¶å°†æ ¡éªŒè¿æ¥çš„æœ‰æ•ˆæ€§ã€‚Default: false **/
             cpds.setTestConnectionOnCheckin(true);
-            /**¶¨ÒåÔÚ´ÓÊı¾İ¿â»ñÈ¡ĞÂµÄÁ¬½ÓÊ§°ÜºóÖØ¸´³¢ÊÔ»ñÈ¡µÄ´ÎÊı£¬Ä¬ÈÏÎª30;**/
+            /**å®šä¹‰åœ¨ä»æ•°æ®åº“è·å–æ–°çš„è¿æ¥å¤±è´¥åé‡å¤å°è¯•è·å–çš„æ¬¡æ•°ï¼Œé»˜è®¤ä¸º30;**/
             cpds.setAcquireRetryAttempts(30);
-            /**Á½´ÎÁ¬½ÓÖĞ¼ä¸ôÊ±¼äÄ¬ÈÏÎª1000ºÁÃë**/
+            /**ä¸¤æ¬¡è¿æ¥ä¸­é—´éš”æ—¶é—´é»˜è®¤ä¸º1000æ¯«ç§’**/
             cpds.setAcquireRetryDelay(1000);
-            /** »ñÈ¡Á¬½ÓÊ§°Ü½«»áÒıÆğËùÓĞµÈ´ı»ñÈ¡Á¬½ÓµÄÏß³ÌÒì³£,
-             µ«ÊÇÊı¾İÔ´ÈÔÓĞĞ§µÄ±£Áô,²¢ÔÚÏÂ´Îµ÷ÓÃgetConnection()µÄÊ±ºò¼ÌĞø³¢ÊÔ»ñÈ¡Á¬½Ó.Èç¹ûÉèÎªtrue,
-             ÄÇÃ´³¢ÊÔ»ñÈ¡Á¬½ÓÊ§°Üºó¸ÃÊı¾İÔ´½«ÉêÃ÷ÒÑ¾­¶Ï¿ª²¢ÓÀ¾Ã¹Ø±Õ.Ä¬ÈÏÎªfalse**/
+            /** è·å–è¿æ¥å¤±è´¥å°†ä¼šå¼•èµ·æ‰€æœ‰ç­‰å¾…è·å–è¿æ¥çš„çº¿ç¨‹å¼‚å¸¸,
+             ä½†æ˜¯æ•°æ®æºä»æœ‰æ•ˆçš„ä¿ç•™,å¹¶åœ¨ä¸‹æ¬¡è°ƒç”¨getConnection()çš„æ—¶å€™ç»§ç»­å°è¯•è·å–è¿æ¥.å¦‚æœè®¾ä¸ºtrue,
+             é‚£ä¹ˆå°è¯•è·å–è¿æ¥å¤±è´¥åè¯¥æ•°æ®æºå°†ç”³æ˜å·²ç»æ–­å¼€å¹¶æ°¸ä¹…å…³é—­.é»˜è®¤ä¸ºfalse**/
             cpds.setBreakAfterAcquireFailure(true);
         } catch (IOException e) {
             e.printStackTrace();
@@ -93,7 +93,7 @@ public class DBConnectionPool {
     }
 
     /**
-     * »ñÈ¡Êı¾İ¿âÁ¬½Ó¶ÔÏó£¬µ¥Àı
+     * è·å–æ•°æ®åº“è¿æ¥å¯¹è±¡ï¼Œå•ä¾‹
      *
      * @return
      */
@@ -109,16 +109,16 @@ public class DBConnectionPool {
     }
 
     /**
-     * »ñÈ¡Êı¾İ¿âÁ¬½Ó
+     * è·å–æ•°æ®åº“è¿æ¥
      *
-     * @return Êı¾İ¿âÁ¬½Ó
+     * @return æ•°æ®åº“è¿æ¥
      */
     public final synchronized Connection getConnection() throws SQLException {
         return cpds.getConnection();
     }
 
     /**
-     * finalize()·½·¨ÊÇÔÚÀ¬»øÊÕ¼¯Æ÷É¾³ı¶ÔÏóÖ®Ç°¶ÔÕâ¸ö¶ÔÏóµ÷ÓÃµÄ¡£
+     * finalize()æ–¹æ³•æ˜¯åœ¨åƒåœ¾æ”¶é›†å™¨åˆ é™¤å¯¹è±¡ä¹‹å‰å¯¹è¿™ä¸ªå¯¹è±¡è°ƒç”¨çš„ã€‚
      *
      * @throws Throwable
      */
