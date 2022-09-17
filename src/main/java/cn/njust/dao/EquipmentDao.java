@@ -5,6 +5,7 @@ import cn.njust.entity.Equipment;
 import cn.njust.utils.DBUtil;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,16 +16,36 @@ public class EquipmentDao extends BaseDao {
     /**
      * 输入器材实现查询器材,返回器材信息
      */
-    public static List<Map<String, Object>> findAllEquipment(Equipment equipment){
-        String sql = "select * from equipment where equipment_id = ?";
-        Object[] params = { equipment.getId() };//根据器材id查询
+    public static List<Equipment> findAllEquipment(){
+        String sql = "select * from equipment";
         List<Map<String, Object>> list = null;
+        List<Equipment> equipments=new ArrayList<Equipment>();
         try {
-            list = DBUtil.executeQuery(sql, params);
+            list = DBUtil.query(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;//返回器材信息List
+        for(Map<String, Object> i:list)
+        {
+            Equipment j=new Equipment();
+            j.setId(i.get("equipment_id").toString());
+            j.setType(i.get("equipment_type").toString());
+            j.setName(i.get("equipment_name").toString());
+            j.setPrice(Integer.parseInt(i.get("equipment_price").toString()));
+            j.setNumber(Integer.parseInt(i.get("equipment_number").toString()));
+            j.setState(Integer.parseInt(i.get("equipment_state").toString()));
+
+        }
+        //System.out.println(list.get(0).get("equipment_state"));
+        return equipments;//返回器材信息
+    }
+
+
+
+    public static void main(String[] args)
+    {
+        EquipmentDao.findAllEquipment();
+
     }
 
     /**
@@ -56,12 +77,9 @@ public class EquipmentDao extends BaseDao {
         }
     }
     /**
-     *   输入Equipment及需要添加的数量,实现器材信息插入
+     *   输入Equipment,实现器材信息插入
      */
-    public static void insertEquipment(int count,Equipment equipment) {
-
-        List<Map<String, Object>> datas = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+    public static void insertEquipment(Equipment equipment) {
             Map<String, Object> map = new HashMap<>();
             map.put("equipment_name",equipment.getName());
             map.put("equipment_id", equipment.getId());
@@ -69,10 +87,8 @@ public class EquipmentDao extends BaseDao {
             map.put("equipment_price",equipment.getPrice() );
             map.put("equipment_state",equipment.getState() );
             map.put("equipment_type",equipment.getType() );
-            datas.add(map);
-        }
         try {
-            DBUtil.insertAll("equipment", datas);
+            DBUtil.insert("equipment",map);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -102,7 +118,7 @@ public class EquipmentDao extends BaseDao {
         } finally {
             super.closeAll();
         }
-        return null;
+        return e;
     }
 
     public void addEquipment(Equipment equipment) {

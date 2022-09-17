@@ -1,6 +1,6 @@
 package cn.njust.dao;
 
-import cn.njust.entity.Equipment;
+
 import cn.njust.entity.User;
 import cn.njust.utils.DBUtil;
 
@@ -14,19 +14,30 @@ import java.util.Map;
 
 public class UserDao extends BaseDao{
     /**
-     * 输入用户实现查询用户,返回用户信息
+     * 查找用户,返回用户信息数组
      */
-    public static List<Map<String, Object>> findAllUser(User user){
-        String sql = "select * from user where user_id = ?";
-        Object[] params = { user.getId() };//根据用户id查询
+    public static List<User> findAllUser(){
+        String sql = "select * from user";
         List<Map<String, Object>> list = null;
+        List<User> users=new ArrayList<User>();
         try {
-            list = DBUtil.executeQuery(sql, params);
+            list = DBUtil.query(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;//返回用户信息List
+        for(Map<String, Object> i:list)
+        {
+            User j=new User();
+            j.setId(i.get("user_id").toString());
+            j.setPassword(i.get("user_password").toString());
+            j.setName(i.get("user_name").toString());
+            j.setNumber(i.get("user_number").toString());
+
+        }
+        //System.out.println(list.get(0).get("user_state"));
+        return users;
     }
+
 
     /**
      *   输入user,实现该用户信息插入

@@ -5,7 +5,7 @@ import cn.njust.entity.User;
 import java.sql.SQLException;
 
 public class LoginDao extends BaseDao {
-    public User findUser(User user) {
+    public User findSingleUser(User user) {
         try {
             super.connect();
             String sql = "select * from user where user_password=? and user_id=? or user_number=?";

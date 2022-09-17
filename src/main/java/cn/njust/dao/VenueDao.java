@@ -1,38 +1,70 @@
 package cn.njust.dao;
 
-import cn.njust.entity.Equipment;
 import cn.njust.entity.User;
 import cn.njust.entity.Venue;
+import cn.njust.utils.DBUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class VenueDao extends BaseDao{
-    public Venue[] allVenue(){
+    /**
+     * 查询场地,返回场地信息
+     */
+    public static List<Venue> findAllVenue(){
+        String sql = "select * from venue";
+        List<Map<String, Object>> list = null;
+        List<Venue> venues=new ArrayList<Venue>();
         try {
-            Venue[] venues=new Venue[100];
-            super.connect();
-            String sql = "select *from venue";
-            pstmt = conn.prepareStatement(sql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                Venue venue=new Venue();
-                venue.setId(rs.getString("venue_id"));
-                venue.setName(rs.getString("venue_name"));
-                venue.setType(rs.getString("venue_type"));
-                venue.setPrice(rs.getInt("venue_price"));
-                venue.setState(rs.getInt("venue_state"));
-
-
-            }
-        }
-        catch (SQLException e) {
+            list = DBUtil.query(sql);
+        } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            super.closeAll();
         }
-        return null;
+        for(Map<String, Object> i:list)
+        {
+            Venue j=new Venue();
+            j.setId(i.get("venue_id").toString());
+            j.setType(i.get("venue_type").toString());
+            j.setName(i.get("venue_name").toString());
+            j.setPrice(Integer.parseInt(i.get("venue_price").toString()));
+            j.setState(Integer.parseInt(i.get("venue_state").toString()));
+
+        }
+        //System.out.println(list.get(0).get("venue_state"));
+        return venues;//返回场地信息
     }
-    public VenueDao findVenue(Venue venue)
+
+    /**
+     *   输入venue,实现场地信息删除
+     */
+    public static void deleteVenueById(Venue venue) {
+        Map<String, Object> whereMap = new HashMap<>();
+        whereMap.put("venue_id", venue.getId());//根据id寻找进而删除
+        try {
+            int count = DBUtil.delete("venue", whereMap);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * 输入venue实现更新，可变更state,price
+     */
+    public static void updateVenue(Venue venue) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("venue_price",venue.getPrice() );//更新价格
+        map.put("venue_state",venue.getState() );//更新状态
+        Map<String, Object> whereMap = new HashMap<>();
+        whereMap.put("venue_id", venue.getId());//根据id寻找
+        try {
+            int count = DBUtil.update("venue", map, whereMap);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+   /* public VenueDao findVenue(Venue venue)
     {
         try {
             super.connect();
@@ -109,5 +141,5 @@ public class VenueDao extends BaseDao{
         }finally{
             super.closeAll();
         }
-    }
+    }*/
 }

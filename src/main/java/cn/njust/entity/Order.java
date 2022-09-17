@@ -1,13 +1,11 @@
 package cn.njust.entity;
 
-import java.sql.Date;
-
 public class Order {
     private String oid;
     private String rid;
     private String uid;
-    private String ordertime;
-    private String returntime;
+    private String orderTime;
+    private String returnTime;
     private int sum;
     private int state;
 
@@ -35,20 +33,20 @@ public class Order {
         this.uid = uid;
     }
 
-    public String getOrdertime() {
-        return ordertime;
+    public String getOrderTime() {
+        return oid;
     }
 
-    public void setOrdertime(String ordertime) {
-        this.ordertime = ordertime;
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
     }
 
-    public String getReturntime() {
-        return returntime;
+    public String getReturnTime() {
+        return returnTime;
     }
 
-    public void setReturntime(String returntime) {
-        this.returntime = returntime;
+    public void setReturnTime(String returnTime) {
+        this.returnTime = returnTime;
     }
 
     public int getSum() {
