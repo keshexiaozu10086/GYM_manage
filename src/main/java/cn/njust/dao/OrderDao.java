@@ -128,7 +128,7 @@ public class OrderDao extends BaseDao{
         }
     }
     /**
-     *   输入Order,实现订单信息插入
+     *   输入Order,实现订单信息插入(不需要输入时间，时间为系统当前自带)
      */
     public static void insertOrder(Order order){
             Map<String, Object> map = new HashMap<>();

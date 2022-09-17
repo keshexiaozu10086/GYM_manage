@@ -61,7 +61,7 @@ public class MessageDao {
 
     public static void deleteMessageById(Message message) {
         Map<String, Object> whereMap = new HashMap<>();
-        whereMap.put("message_id", message.getId());//根据订单id寻找进而删除
+        whereMap.put("message_id", message.getId());//根据消息id寻找进而删除
         try {
             int count = DBUtil.delete("message", whereMap);
         } catch (SQLException e) {
