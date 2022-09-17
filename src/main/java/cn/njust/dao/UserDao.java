@@ -14,18 +14,18 @@ import java.util.Map;
 
 public class UserDao extends BaseDao{
     /**
-     * 输入用户id实现查询用户,返回用户信息
+     * 输入用户实现查询用户,返回用户信息
      */
-    public static List<Map<String, Object>> findAllUser(String user_id){
+    public static List<Map<String, Object>> findAllUser(User user){
         String sql = "select * from user where user_id = ?";
-        Object[] params = { user_id };
+        Object[] params = { user.getId() };//根据用户id查询
         List<Map<String, Object>> list = null;
         try {
             list = DBUtil.executeQuery(sql, params);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return list;//返回用户信息List
     }
 
     /**
@@ -45,11 +45,11 @@ public class UserDao extends BaseDao{
         }
     }
     /**
-     * 输入用户id实现该用户信息删除
+     * 输入用户实现该用户信息删除
      */
     public static void deleteUser(User user) {
         Map<String, Object> whereMap = new HashMap<>();
-        whereMap.put("user_id", user.getId());
+        whereMap.put("user_id", user.getId());//根据id寻找进而删除
         try {
             int count = DBUtil.delete("user", whereMap);
         } catch (SQLException e) {
@@ -62,10 +62,9 @@ public class UserDao extends BaseDao{
      */
     public static void updateUser(User user) {
         Map<String, Object> map = new HashMap<>();
-        map.put("user_password",user.getPassword() );
-
+        map.put("user_password",user.getPassword() );//更新密码
         Map<String, Object> whereMap = new HashMap<>();
-        whereMap.put("user_id", user.getId());
+        whereMap.put("user_id", user.getId());//根据id寻找
         try {
             int count = DBUtil.update("user", map, whereMap);
         } catch (SQLException e) {
