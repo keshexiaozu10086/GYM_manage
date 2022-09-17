@@ -5,6 +5,7 @@ import cn.njust.entity.Equipment;
 import cn.njust.utils.DBUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,28 @@ public class EquipmentDao extends BaseDao {
             e.printStackTrace();
         }
     }
+    /**
+     *   输入Equipment及需要添加的数量,实现器材信息插入
+     */
+    public static void insertEquipment(int count,Equipment equipment) {
 
+        List<Map<String, Object>> datas = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("equipment_name",equipment.getName());
+            map.put("equipment_id", equipment.getId());
+            map.put("equipment_number",equipment.getNumber() );
+            map.put("equipment_price",equipment.getPrice() );
+            map.put("equipment_state",equipment.getState() );
+            map.put("equipment_type",equipment.getType() );
+            datas.add(map);
+        }
+        try {
+            DBUtil.insertAll("equipment", datas);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
    /* public Equipment findEquipment(Equipment equipment) {
