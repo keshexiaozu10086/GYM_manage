@@ -43,6 +43,6 @@ public class Rent {
 
     public static void main(String[] args){
         Rent t=new Rent();
-        t.equipmentOrder("0","0",0);
+        //t.equipmentOrder("0","0",0);
     }
 }

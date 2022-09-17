@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserDao extends BaseDao{
+public class UserDao {
     /**
      * 查找用户,返回用户信息数组
      */

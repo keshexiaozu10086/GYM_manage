@@ -9,7 +9,7 @@ public class Login {
     public int login(User user)
     {
         LoginDao dao=new LoginDao();
-        User userCorrect = dao.findUser(user);
+        User userCorrect = dao.findSingleUser(user);
         if(user.getPassword()==userCorrect.getPassword())return 0;//正确登录
         return 1;
     }

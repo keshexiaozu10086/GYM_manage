@@ -2,18 +2,22 @@ package cn.njust.Service.Customer;
 
 import cn.njust.entity.*;
 
+import java.util.List;
+
 public class View {
-    public Equipment[] viewEquipment(){
-        return null;
-    }
-    public Venue[] viewVenue(){
-        return null;
-    }
-    public Order[] viewOrder(String uid)
+    public List<Equipment> viewEquipment()
     {
         return null;
     }
-    public Message[] viewMessage(String uid)
+    public List<Venue> viewVenue()
+    {
+        return null;
+    }
+    public List<Order> viewOrder(String uid)
+    {
+        return null;
+    }
+    public List<Message> viewMessage(String uid)
     {
         return null;
     }
