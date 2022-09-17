@@ -5,7 +5,7 @@ import cn.njust.entity.Equipment;
 import java.sql.SQLException;
 
 public class EquipmentDao extends BaseDao {
-    public Equipment allEquipment(Equipment equipment)
+    public Equipment[] allEquipment(Equipment equipment)
     {
         try {
             super.connect();
@@ -26,7 +26,7 @@ public class EquipmentDao extends BaseDao {
         } finally {
             super.closeAll();
         }
-        return equipment;
+        return null;
     }
     public Equipment findEquipment(Equipment equipment) {
         try {

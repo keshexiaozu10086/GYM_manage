@@ -31,7 +31,7 @@ public class Register {
         while(false);//查找数据库检验是否有重复ID
         newid.setPassword(password1);
         UserDao dao=new UserDao();
-        dao.insert(newid);
+        dao.insertSingleUser();
         //将数据插入数据库
         return 0;
     }

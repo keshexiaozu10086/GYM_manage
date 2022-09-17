@@ -7,18 +7,22 @@ import cn.njust.entity.Venue;
 import java.sql.SQLException;
 
 public class VenueDao extends BaseDao{
-    public Venue allVenue(Venue venue){
+    public Venue[] allVenue(){
         try {
+            Venue[] venues=new Venue[100];
             super.connect();
             String sql = "select *from venue";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
+                Venue venue=new Venue();
                 venue.setId(rs.getString("venue_id"));
                 venue.setName(rs.getString("venue_name"));
                 venue.setType(rs.getString("venue_type"));
                 venue.setPrice(rs.getInt("venue_price"));
                 venue.setState(rs.getInt("venue_state"));
+
+
             }
         }
         catch (SQLException e) {
@@ -26,7 +30,7 @@ public class VenueDao extends BaseDao{
         } finally {
             super.closeAll();
         }
-        return venue;
+        return null;
     }
     public VenueDao findVenue(Venue venue)
     {

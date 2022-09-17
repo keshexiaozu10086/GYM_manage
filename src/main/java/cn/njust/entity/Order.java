@@ -6,8 +6,8 @@ public class Order {
     private String oid;
     private String rid;
     private String uid;
-    private Date ordertime;
-    private Date returntime;
+    private String ordertime;
+    private String returntime;
     private int sum;
     private int state;
 
@@ -35,19 +35,19 @@ public class Order {
         this.uid = uid;
     }
 
-    public Date getOrdertime() {
+    public String getOrdertime() {
         return ordertime;
     }
 
-    public void setOrdertime(Date ordertime) {
+    public void setOrdertime(String ordertime) {
         this.ordertime = ordertime;
     }
 
-    public Date getReturntime() {
+    public String getReturntime() {
         return returntime;
     }
 
-    public void setReturntime(Date returntime) {
+    public void setReturntime(String returntime) {
         this.returntime = returntime;
     }
 
