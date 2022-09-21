@@ -40,10 +40,10 @@ public class DBConnectionPool {
                 username = properties.getProperty("username");
                 password = properties.getProperty("password");
              }else {
-            	 driverClassName = "com.mysql.jdbc.Driver";            
-                 url = "jdbc:mysql://localhost:3306/gym?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
+            	 driverClassName = "com.mysql.cj.jdbc.Driver";
+                 url = "jdbc:mysql://localhost:3306/gym";
                  username = "root";
-                 password = "123456";
+                 password = "root";
              }  
 
             /**数据库连接池对象**/

@@ -72,7 +72,7 @@ public class MessageDao {
 /*
  *测试
  */
-   /*public static void main(String[] args){
+   public static void main(String[] args){
        Message m=new Message();
        m.setContent("好");
        m.setId("6");
@@ -80,5 +80,5 @@ public class MessageDao {
        m.setUid("1");
        m.setAid("8");
        MessageDao.insertMessage(m);
-    }*/
+    }
 }

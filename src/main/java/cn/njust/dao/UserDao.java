@@ -82,14 +82,16 @@ public class UserDao {
             e.printStackTrace();
         }
     }
-   /* public static void main(String[] args) {
+   public static void main(String[] args) {
         // 1.测试单条插入 成功
-         //	insertSingleUser();
+       User a=new User();
+       a.setId("0");
+       insertSingleUser(a);
         // 2.测试更新 成功
        // updateUser();
         // 3.测试删除 成功
         // deleteUser();
 
 
-    }*/
+    }
 }

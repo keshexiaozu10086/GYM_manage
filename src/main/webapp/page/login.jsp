@@ -12,12 +12,12 @@
 <div class="container right-panel-active">
 
   <div class="container_from container--signup">
-    <form action="#" class="from" id="from1">
+    <form action="servlet/LoginController" class="from" id="from1">
       <h2 class="from_title">注册账号</h2>
-      <input type="text" placeholder="姓名" class="input">
-      <input type="text" placeholder="手机号" class="input">
-      <input type="password" placeholder="密码" class="input">
-      <input type="password" placeholder="确认密码" class="input">
+      <input name="name" type="text" placeholder="姓名" class="input">
+      <input name="phone" type="text" placeholder="手机号" class="input">
+      <input name="pwd1" type="password" placeholder="密码" class="input">
+      <input name="pwd2" type="password" placeholder="确认密码" class="input">
       <button class="btn">点击注册</button>
     </form>
     </form>

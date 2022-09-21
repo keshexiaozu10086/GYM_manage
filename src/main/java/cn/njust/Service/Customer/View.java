@@ -1,13 +1,14 @@
 package cn.njust.Service.Customer;
 
 import cn.njust.entity.*;
+import cn.njust.dao.*;
 
 import java.util.List;
 
 public class View {
     public List<Equipment> viewEquipment()
     {
-        return null;
+        return EquipmentDao.findAllEquipment();
     }
     public List<Venue> viewVenue()
     {
